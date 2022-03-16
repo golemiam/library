@@ -1,0 +1,57 @@
+"""
+Robbie Platt
+Library of Congress (Project 4)
+Due date: 3/26/2022
+
+
+This program will read the file that is in the sys.argv and will write it 
+to another file. To use this you will want to use your IDE to run the file,
+have a file in the sys.argv that has a bar separated 3 letter code at the 
+end of each line.
+
+
+"""
+
+import sys
+import csv
+
+
+def main():
+
+# First: Noval Sumamry
+# Second Noval text
+    with open(sys.argv[1], "r") as in_file:
+        for line in in_file:
+            splitter = line.strip("\n").split("|")
+            code = splitter[2]
+            list = []
+            list.append(code)
+            list.append(line)
+            string = str(list)
+            clean = string.strip("[]")
+            """
+            for _i in range(len(line)):
+                group = clean.index
+                group_string = str(group)
+                cleaner = group_string.strip("'")
+            print(cleaner)
+            print(group)
+            """
+            #code_one = code.remove[0]
+            #print(code_one)
+               
+            #print(list)
+            print(clean)
+            reader = csv.reader(in_file, delimiter = "|")
+            #print(code)
+            
+
+            for word in line:
+                reader = csv.reader(sys.argv[1], delimiter = "|", lineterminator = "\n")
+                
+
+
+
+
+if __name__ == "__main__":
+    main()
