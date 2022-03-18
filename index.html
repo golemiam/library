@@ -24,11 +24,13 @@ def main():
         for line in in_file:
             splitter = line.strip("\n").split("|")
             code = splitter[2]
+            line_number = splitter[1]
             list = []
             list.append(code)
             list.append(line)
             string = str(list)
             clean = string.strip("[]")
+            clean = clean.strip("\n")
             """
             for _i in range(len(line)):
                 group = clean.index
@@ -39,16 +41,20 @@ def main():
             """
             #code_one = code.remove[0]
             #print(code_one)
-               
+            print(line_number)
             #print(list)
-            print(clean)
+            #print(clean)
             reader = csv.reader(in_file, delimiter = "|")
+            """
+            for row in reader:
+                print(row)
+            """
             #print(code)
             
 
             for word in line:
                 reader = csv.reader(sys.argv[1], delimiter = "|", lineterminator = "\n")
-                
+            #print(reader)    
 
 
 
