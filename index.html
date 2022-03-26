@@ -16,48 +16,101 @@ import sys
 import csv
 
 
-def main():
+def code():
+    with open(sys.argv[1], "r") as in_file:
+        with open("novel_text.txt", "w") as out_file:
+            for line in in_file:
+                splitter = line.strip("\n").split("|")
+                letter_code = splitter[2]
+            print(letter_code)
+
+def code_two():
+    with open(sys.argv[1], "r") as in_file:
+        with open("novel_text.txt", "w") as out_file:
+            reader = csv.reader(in_file, delimiter = "|")
+            lines = list(reader)
+            code = lines[1][2]
+        print(code)      
+
+def code_count():
+    with open(sys.argv[1], "r") as in_file:
+        with open("novel_text.txt", "w") as out_file:
+            unique_code_list = []
+            for line in in_file:
+                splitter = line.strip("\n").split("|")
+                letter_code = splitter[2]
+                 
+                
+
+    code_list = list(letter_code)
+    code_first = code_list[0] + code_list[1] + code_list[2]
+    #code_second = code_list[4] + code_list[5] + code_list[6]
+    print(code_first) 
+    with open(sys.argv[1], "r") as in_file:
+        with open("novel_text.txt", "w") as out_file:
+            if letter_code == code_first:
+                code_first_list = []
+                for line in in_file:
+                    if code_first == letter_code:
+                        code_first_list.append(code_first)
+    count_code_first = code_first_list.count(code_first)
+    #print(code_first_list)
+    #print(count_code_first)
+    
+def novel_text():
 
 # First: Noval Sumamry
 # Second Noval text
     with open(sys.argv[1], "r") as in_file:
-        for line in in_file:
-            splitter = line.strip("\n").split("|")
-            code = splitter[2]
-            line_number = splitter[1]
-            list = []
-            list.append(code)
-            list.append(line)
-            string = str(list)
-            clean = string.strip("[]")
-            clean = clean.strip("\n")
-            """
-            for _i in range(len(line)):
-                group = clean.index
-                group_string = str(group)
-                cleaner = group_string.strip("'")
-            print(cleaner)
-            print(group)
-            """
-            #code_one = code.remove[0]
-            #print(code_one)
-            print(line_number)
-            #print(list)
-            #print(clean)
-            reader = csv.reader(in_file, delimiter = "|")
-            """
-            for row in reader:
-                print(row)
-            """
-            #print(code)
-            
+        with open("novel_text.txt", "w") as out_file:
+            for line in in_file:
+                splitter = line.strip("\n").split("|")
+                #code = splitter[2]
+                line_number = splitter[1]
+                text = splitter[0]
+                list = []
+                
+                list.append(code)
+                list.append(line)
+                string = str(list)
+                clean = string.strip("[]")
+                clean = clean.strip("\n")
+                """
+                for _i in range(len(line)):
+                    group = clean.index
+                    group_string = str(group)
+                    cleaner = group_string.strip("'")
+                print(cleaner)
+                print(group)
+                """
+                #code_one = code.remove[0]
+                #print(code_one)
+                
+                print(code())
+                #print(list)
+                #print(clean)
+                reader = csv.reader(in_file, delimiter = "|")
+                writer = csv.writer(out_file, lineterminator = "\n")
 
-            for word in line:
-                reader = csv.reader(sys.argv[1], delimiter = "|", lineterminator = "\n")
-            #print(reader)    
+                for row in reader:
+                    print(row)
+                    writer.writerow(row)
 
+                
+                
+                #print(text)
+                #print(code)
+                #print(line_number)
 
+                for word in line:
+                    reader = csv.reader(sys.argv[1], delimiter = "|", lineterminator = "\n")
+                print(reader)    
 
+def main():
+    #novel_text()
+    #code_count()
+    code()
+    code_two()
 
 if __name__ == "__main__":
     main()
