@@ -16,27 +16,23 @@ import sys
 import csv
 import operator
 
+def read_book(file_name):
+    with open(file_name, "r") as in_file:
+        reader = csv.reader(in_file, delimiter = "|")
+        lines = list(reader)
+    for line in lines:
+        line[1] = int(line[1])
+    lines.sort(key = lambda x:x[1])
+
+    for _i in range(6):
+        print(lines[_i])
+
 
 def lines_length(lines):
     return len(lines)
         
 
-def longest_line():
-    """
-    Identifies the longest line.
-    """###
-    with open(sys.argv[1], "r") as in_file:
-        with open("novel_summary.txt", "w") as out_file:
-            reader = csv.reader(in_file, delimiter = "|")
-            longest = 0
-            code = ""
-            for row in reader:
-                if int(row[1]) > longest:
-                    longest = int(row[1])
-                    code = row[2]
-            print(longest)
-            return code
-            return longest  
+ 
                   
 
 def shortest_line():
@@ -47,21 +43,26 @@ def shortest_line():
 
 
 
-def get_code(data):
+def get_code(get_lines):
     """
     gets 3 letter codes
     """
-    pass
-    pass
-    pass
     with open(sys.argv[1], "r") as in_file:
         with open("novel_text.txt", "w") as out_file:
             reader = csv.reader(in_file, delimiter = "|")
             lines = list(reader)
+            codes = []
+            for line  in lines:
+                if not line[2] in codes:
+                    codes.append(line[2])
+            codes.sort()
+            print(codes)
+            
+            
             return lines[2]
 
 
-def write_book_data():
+def write_book_data(data):
     """
     Format's data
     """
@@ -72,7 +73,7 @@ def write_book_data():
 
 def sorted_lines():
     with open(sys.argv[1], "r") as in_file:
-        with open("book_data.txt", "w") as out_file:
+        with open("novel_summary.txt", "w") as out_file:
             reader = csv.reader(in_file, delimiter = "|")
             lines = list(reader)
             
@@ -226,14 +227,14 @@ def lines_length():
     
     return len(lines)
         
-
-def longest_line():
+def longest_line_one():
     """
     Identifies the longest line.
     """###
     with open(sys.argv[1], "r") as in_file:
         with open("novel_summary.txt", "w") as out_file:
             reader = csv.reader(in_file, delimiter = "|")
+            lines = list(reader)
             longest = 0
             code = ""
             for row in reader:
@@ -242,7 +243,28 @@ def longest_line():
                     code = row[2]
             print(longest)
             return code
-            return longest  
+            return longest 
+
+def longest_line(code, lines):
+    """
+    Identifies the longest line.
+    """###
+    with open(sys.argv[1], "r") as in_file:
+        with open("novel_summary.txt", "w") as out_file:
+            reader = csv.reader(in_file, delimiter = "|")
+            lines = list(reader)
+            longest = ""
+            for line in lines:
+                if line[2] == code:
+                    longest = line
+                    print(longest)
+                    break
+            for line in lines:
+                if line[2] == code and len(line[0]) >= len(longest[0]):
+                    longest = line
+                    print(longest)
+        return longest
+
                   
 
 def shortest_line():
@@ -255,12 +277,18 @@ def main():
     """
     Main function, used to call the functions of the program.
     """
-    code()
+    read_book(sys.argv[1])
+    lines = read_book(sys.argv[1])
+    #get_code(lines)
+    code = get_code(lines)
+    #write_book_data(lines)
+    longest_line(code, lines)
+    #code()
     #code_two()
     #code_loop(code(), code())
     #fetch_book_data(sys.argv[1])
-    #longest_line()
-    #write_book_data()
+    
+
     #total()
     #sort_books_data(sys.argv, code())
     #lines_length()
